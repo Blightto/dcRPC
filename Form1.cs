@@ -8,7 +8,6 @@ namespace dcRPC
     public partial class Form1 : Form
     {
         public DiscordRpcClient client;
-
         public string klasor = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @".pamukkRpc");
         public string dosya = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @".pamukkRpc\userinfo.pamuk");
 
@@ -75,23 +74,6 @@ namespace dcRPC
             inputfile.Close();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            notifyIcon1.Visible = true;
-            this.Hide();
-            Form2 form = new Form2();
-            form.Show();
-
-            StreamWriter writer = new StreamWriter(dosya);
-            writer.WriteLine(textBox1.Text);
-            writer.WriteLine(textBox2.Text);
-            writer.WriteLine(textBox3.Text);
-            writer.WriteLine(textBox4.Text);
-            writer.WriteLine(textBox5.Text);
-            writer.WriteLine(textBox6.Text);
-            writer.Close();
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             try { 
@@ -126,5 +108,24 @@ namespace dcRPC
             button3.Enabled = false;
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StreamWriter writer = new StreamWriter(dosya);
+            writer.WriteLine(textBox1.Text);
+            writer.WriteLine(textBox2.Text);
+            writer.WriteLine(textBox3.Text);
+            writer.WriteLine(textBox4.Text);
+            writer.WriteLine(textBox5.Text);
+            writer.WriteLine(textBox6.Text);
+            writer.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            notifyIcon1.Visible = true;
+            this.Hide();
+            Form form = new bildirim();
+            form.Show();
+        }
     }
 }
